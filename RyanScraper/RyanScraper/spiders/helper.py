@@ -1,5 +1,7 @@
 import re
 
+from bs4 import BeautifulSoup
+
 def build_regex_or(strings, file_extension=False):
     '''Return a regex that matches any strings in a given list'''
     regex = ''
@@ -17,3 +19,10 @@ def build_regex_or(strings, file_extension=False):
             regex += string + ')'
 
     return regex
+
+def get_data_stat(dom_obj, data_stat):
+    for d in dom_obj.find_all('td', attrs={'data-stat': data_stat}):
+        return d
+
+def add_to_row(data_dict, team, year, field, value):
+    data_dict[team][year][field] = value
