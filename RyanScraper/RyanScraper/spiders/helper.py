@@ -24,5 +24,8 @@ def get_data_stat(dom_obj, data_stat):
     for d in dom_obj.find_all('td', attrs={'data-stat': data_stat}):
         return d
 
-def add_to_row(data_dict, team, year, field, value):
-    data_dict[team][year][field] = value
+def add_to_row(data_dict, team, field, value):
+    if team not in data_dict:
+        data_dict[team] = {}
+
+    data_dict[team][field] = value
